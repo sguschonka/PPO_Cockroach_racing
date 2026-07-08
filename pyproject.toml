@@ -1,7 +1,7 @@
 [tool.poetry]
-name = "racingwithai"
+name = "cockroach racing PPO"
 version = "0.1.0"
-description = ""
+description = "This project involves training a PPO agent to navigate a cockroach along various tracks. Much like in standard races."
 authors = ["Alexander Klepikov <sklepikov2007@gmail.com>"]
 readme = "README.md"
 
