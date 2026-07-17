@@ -1,0 +1,24 @@
+[tool.poetry]
+name = "cockroach racing PPO"
+version = "0.1.0"
+description = "This project involves training a PPO agent to navigate a cockroach along various tracks. Much like in standard races."
+authors = ["Alexander Klepikov <sklepikov2007@gmail.com>"]
+readme = "README.md"
+package-mode = false
+
+[tool.poetry.dependencies]
+python = "^3.12"
+numpy = "==2.5.0"
+pygame = "==2.6.1"
+gymnasium = "==1.3.0"
+tensorflow = {version = "2.21.0", extras = ["and-cuda"]}
+ruff = "==0.15.20"
+optuna = "==4.9.0"
+ipykernel = "^7.3.0"
+matplotlib = "^3.11.0"
+scipy = "^1.18.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
