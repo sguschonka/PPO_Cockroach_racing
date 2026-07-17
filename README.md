@@ -16,7 +16,7 @@
 
 ---
 
-
+<img width="800" height="436" alt="cockroach_racing" src="https://github.com/user-attachments/assets/93a1799e-1054-4476-8758-ec4985a6ae99" />
 
 ---
 
