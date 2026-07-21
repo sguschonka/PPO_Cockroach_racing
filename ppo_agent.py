@@ -17,6 +17,7 @@ class PPOAgent:
         batch_size=64,
         max_grad_norm=None,
         checkpoint_dir="models/",
+        entropy_coef=0.01,
     ):
 
         self.checkpoint_dir = checkpoint_dir
@@ -28,6 +29,7 @@ class PPOAgent:
         self.max_value_train_iters = max_value_iters
         self.batch_size = batch_size
         self.max_grad_norm = max_grad_norm
+        self.entropy_coef = entropy_coef
 
         self.actor.compile(
             optimizer=tf.keras.optimizers.Adam(
@@ -71,7 +73,7 @@ class PPOAgent:
         for _ in range(self.max_policy_train_iters):
             np.random.shuffle(indices)
 
-            # ИСПРАВЛЕНИЕ ОТ КОЛЛЕГИ: Мини-батчинг
+            # Мини-батчинг
             for start in range(0, len(states), self.batch_size):
                 end = start + self.batch_size
                 batch_idx = indices[start:end]
@@ -101,12 +103,11 @@ class PPOAgent:
                         * b_advantages
                     )
 
-                    # ИСПРАВЛЕНИЕ: Entropy Bonus (как у коллеги, но с коэффициентом)
                     entropy = 0.5 * tf.reduce_sum(
                         tf.math.log(2 * np.pi * np.e) + 2 * tf.math.log(std), axis=-1
                     )
 
-                    policy_loss = -tf.minimum(surrogate1, surrogate2) - 0.01 * entropy
+                    policy_loss = -tf.minimum(surrogate1, surrogate2) - self.entropy_coef * entropy
                     policy_loss = tf.reduce_mean(policy_loss)
 
                 gradients = tape.gradient(policy_loss, self.actor.trainable_variables)

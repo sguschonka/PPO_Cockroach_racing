@@ -93,6 +93,7 @@ def main():
         batch_size=PARAMS["batch_size"],
         max_grad_norm=0.5,
         checkpoint_dir=CHECKPOINT_DIR,
+        entropy_coef=PARAMS["entropy_coef"]
     )
 
     env = gym.make(ENV_ID, render_mode="human" if RENDER_TRAINING else None)
